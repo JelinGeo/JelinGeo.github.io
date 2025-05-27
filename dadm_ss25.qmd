@@ -1,0 +1,147 @@
+---
+title: "Presentation and Handout Guidelines"
+subtitle: "Data Analysis for Decision-Making (SS 2025)"
+
+author:
+    name: "© Prof. Dr. Stephan Huber"
+    email: stephan.huber@hs-fresenius.de
+    affiliation:
+      - name: Hochschule Fresenius - University of Applied Science
+        url: https://hubchev.github.io/
+course: Data Analysis for Decision-Making
+professor: Prof. Dr. Stephan Huber
+date: today
+date-format: long
+
+abstract: "This document outlines the requirements for successfully contributing to the course through an academic presentation. It introduces and assigns the available topics, establishes the standards for both delivery and the creation of files, and provides tips how students can effectively meet the expectations."
+
+bibliography: "/home/sthu/Dropbox/LIT/LIT_full.bib"
+csl: "/home/sthu/Dropbox/LIT/apa.csl"
+format:
+  html: 
+    embed-resources: true
+  pdf: 
+    pdf-engine: pdflatex
+    documentclass: article
+    classoption: [a4paper]
+    fontsize: 11pt
+    geometry:
+      - top=30mm
+      - left=20mm
+      - right=20mm
+      - bottom=30mm
+    colorlinks: true
+    link-citations: true
+
+number-sections: true
+---
+
+# Assessment methods and criteria 
+
+Students complete this module with an academic presentation. 
+The presentation will take place during the lecture period, with the exact dates set by the lecturer. Each presentation lasts a minimum of 10 minutes per student. Additionally, students should produce a handout outlining the key points of your presentation and the literature on which it is based. The handout should provide additional information and resources beyond what is covered in the presentation. In other words, the handout should complement the presentation. The length of the handout should be between 3 and 5 pages of text. 
+
+The presentation contributes 65% to the module grade, while the handout contributes 35%. A passing grade for this module is achieved when the overall grade is greater than or equal to 4.0.
+
+# Topics and dates
+
+@tbl-tpc lists the topics, along with the student's matriculation number and initials to identify those assigned to each topic, and the date of their presentation. 
+
+If you do not see your number on the list but have registered, please contact me as soon as possible. Note that the presentation day is an official examination day, and failure to attend will result in a grade of 5.0. Ensure that you do not miss this important date.
+
+::: {#tbl-tpc}
+
+| Date         | Presentation topic                                                                              | Matriculation number and initials |
+|--------------|:------------------------------------------------------------------------------------------------|----------------|
+| 05/28/2025   | 1. Importing Data in R: Exploring Various Packages and Their Advantages                        |  400806611   SY     |
+| 05/28/2025   | 2. The Importance of Summary Statistics and Techniques for Creating Them in R                  | 400826617 GJ    |
+| 06/04/2025   | 3. Handling Duplicates in Data: Challenges and Solutions                                       |  400889819   TB   |
+| 06/04/2025   | 4. Benefits and Risks of Correlations in Decision Making Using R for Analysis                  | 400381761   HF   |
+| 06/11/2025   | 5. Conducting and Presenting Multiple Linear Regression Analysis Using R                        | 400706062   LT   |
+| 06/11/2025   | 6. Merging Datasets Using R                                                                     | 400924750   NA   |
+| 06/11/2025   | 7. The Value of Replication Studies: Insights from Rogoff and Reinhart's 2003 Publication       | 400970796 CI   |
+| 06/18/2025   | 8. Data Analysis Errors: Examples of Actual Mistakes in Scientific Publications                 | 400828258  ZM   |
+| 06/18/2025   | 9. Small Errors, Big Consequences: Lessons from Data Mismanagement in Business                 | 400889526   TA   |
+| 06/18/2025   | 10. R Control Flow Statements: Building Blocks for Automated Decision-Making                   | 400963829  HH    |
+
+Topics, students, and dates
+:::
+
+
+
+
+# Content of the presentation and handout
+
+Your presentation should aim to enhance your fellow students' understanding of the assigned topic. Given the limited presentation time, it is essential to select your content carefully. One of your key challenges is to identify the most important elements of your topic and present them in a manner that can be communicated and understood within the allocated time. In some cases, your presentation may also ignite the audience's curiosity, encouraging them to explore the topic further on their own. 
+
+While you are responsible for the overall content, your submission must include R code and an exercise related to your topic. One option is to discuss an application of the R programming language. The exercise should be completed by the students during the class immediately following your presentation. This interactive component will enhance engagement and reinforce the material discussed.
+
+
+# Form of the presentation and the handout
+
+Create a presentation and a handout using Quarto. The handout layout should adhere to the style guide of @APA2020Publication. Therefore, I recommend using the Quarto extension, apaquarto, which you can find here: [https://github.com/wjschne/apaquarto](https://github.com/wjschne/apaquarto). Both your handout and presentation should be available online on the day of your presentation. Ensure the HTML file is a standalone website (HTML), and also provide a PDF version of your handout and presentation. The PDF of your handout should be formatted for A4 paper. For guidance on creating a standalone HTML file, refer to [Quarto HTML Publishing](https://quarto.org/docs/output-formats/html-publishing.html#standalone-html). Publish both the website and handout on GitHub, sharing the URLs with the audience for access during your presentation. Additionally, please submit at least the following files on ILIAS: 
+
+- Quarto file of your handout.
+- Quarto file of your presentation.
+- HTML file of your handout.
+- HTML file of your presentation.
+- PDF file of your handout.
+- PDF file of your presentation.
+
+The design and the layout of the presentation slides are your choice. However, please avoid trying to impress with elaborate layouts or extraneous details. This is an academic presentation, and distracting decorations are inappropriate. Your primary focus should be on effectively communicating information, facts, and insights to the reader. Feel free to include any elements that support this goal. In the presentation, tables and figures don't need to be numbered.
+
+Also, consider additional requirements for your submission outlined below.
+
+### Add this affidavit to your handout {#sec-affidavit -}
+
+*Your report should contain the following **Affidavit**. Simply, fill it out and put it at the end of your report. You can check the box in Quarto like this:*
+
+```{quarto}
+-   [x] I checked this box
+```
+
+
+
+
+::: {.callout-tip appearance="default" title="Affidavit" icon=false}
+I hereby affirm that this submitted paper was authored unaided and solely by me. Additionally, no other sources than those in the reference list were used. Parts of this paper, including tables and figures, that have been taken either verbatim or analogously from other works have in each case been properly cited with regard to their origin and authorship. This paper either in parts or in its entirety, be it in the same or similar form, has not been submitted to any other examination board and has not been published.
+
+I acknowledge that the university may use plagiarism detection software to check my thesis. I agree to cooperate with any investigation of suspected plagiarism and to provide any additional information or evidence requested by the university.
+
+Checklist:
+
+-   [ ] The handout contains 3-5 pages of text.
+-   [ ] The submission contains the Quarto file of the handout.
+-   [ ] The submission contains the Quarto file of the presentation.
+-   [ ] The submission contains the HTML file of the handout.
+-   [ ] The submission contains the HTML file of the  presentation.
+-   [ ] The submission contains the PDF file of the  handout.
+-   [ ] The submission contains the PDF file of the  presentation.
+-   [ ] The title page of the presentation and the handout contain personal details (name, email, matriculation number). 
+-   [ ] The handout contains a abstract.
+-   [ ] The presentation and the handout contain a bibliography, created using BibTeX with APA citation style.
+-   [ ] Either the handout or the presentation contains R code that proof the expertise in coding.
+-   [ ] The handout includes an introduction to guide the reader and a conclusion summarizing the work and discussing potential further investigations and readings, respectively.
+-   [ ] All significant resources used in the report and R code development.
+-   [ ] The filled out Affidavit.
+-   [ ] A concise description of the successful use of Git and GitHub, as detailed here: [https://github.com/hubchev/make_a_pull_request](https://github.com/hubchev/make_a_pull_request).
+-   [ ] The link to the presentation and the handout published on GitHub.
+
+\[Your Name,\] \[Date,\] \[Place\]
+:::
+
+# General tips
+
+I refrain from specific advice on good writing, structuring your work, or adhering to academic rules and conventions. Therefore, I recommend reading @Huber2024My and the literature cited therein. 
+
+Since this is an academic presentation and work, respectively, please choose your sources carefully and ensure that you cite them appropriately.
+
+If anything is unclear, please let me know as soon as possible. It is your responsibility to be well prepared on the day of your presentation. If you encounter any problems, let me know immediately and I will do my best to help you. However, please understand that I may have limited availability in the days or weeks leading up to your presentation. Prioritise the essential tasks that are technically complex or where something is likely to go wrong.
+
+
+# References
+
+::: {#refs}
+:::
+
+

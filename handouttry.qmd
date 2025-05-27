@@ -1,0 +1,354 @@
+---
+title: "The Importance of Summary Statistics and Techniques for Creating Them in R"
+shorttitle: "Summary Statistics and Techniques in R"
+# Set names and affiliations.
+# It is nice to specify everyone's orcid, if possible.
+# There can be only one corresponding author, but declaring one is optional.
+author:
+  - name: "Jelin George (Matriculation Number: 400826617)"
+    corresponding: true
+    email: george.jelin@stud-hs.fresenius.de
+    url: 
+    affiliations:
+      - id: 400826617
+        name: "Hochschule Fresenius - University of Applied Science"
+        group: "International Management, M.A."
+        department: ~
+        address: ~
+        city: ~
+        region: ~
+        country: ~
+        postal-code: ~
+blank-lines-above-author-note: 2
+author-note:
+  status-changes: 
+    # Example: [Author name] is now at [affiliation].
+    affiliation-change:
+    # Example: [Author name] is deceased.
+    deceased: ~
+  # Disclosures condensed to one paragraph, but you can start a field with two line breaks to break them up: \n\nNew Paragraph
+  disclosures:
+    # Example: This study was registered at X (Identifier Y).
+    study-registration: ~
+    # Acknowledge and cite data/materials to be shared.
+    data-sharing: ~
+    # Example: This article is based on data published in [Reference].
+    # Example: This article is based on the dissertation completed by [citation].  
+    related-report: ~
+    # Example: [Author name] has been a paid consultant for Corporation X, which funded this study.
+    conflict-of-interest: The authors have no conflicts of interest to disclose.
+    # Example: This study was supported by Grant [Grant Number] from [Funding Source].
+    financial-support: ~
+    # Example: The authors are grateful to [Person] for [Reason].
+    gratitude: ~
+    # Example. Because the authors are equal contributors, order of authorship was determined by a fair coin toss.
+    authorship-agreements: ~
+abstract: "This document presents a concise overview of summary statistics and their importance in R. Summary statistics - such as mean, median, standard deviation, and frequency counts - capture the key features of a dataset, enabling quick exploration and interpretation. R provides powerful functions and visualization tools to efficiently compute and present these statistics, making them essential for simplifying data, identifying patterns, and supporting informed analysis and decision-making. Practical examples and code are provided to demonstrate these concepts in action. The document also discusses the limitations of summary statistics and its application." 
+keywords: [summary statistics, R programming, data analysis, descriptive statistics, data visualization, exploratory data analysis, limitations]
+# If true, tables and figures are mingled with the text instead of listed at the end of the document.
+impact-statement: ~
+floatsintext: true
+# Numbered lines (.pdf and .docx only)
+numbered-lines: false
+# File with references
+bibliography: bibliography.bib
+csl: apa.csl
+# Suppress title page
+suppress-title-page: false
+# Link citations to references
+link-citations: true
+# Masks references that appear in the masked-citations list
+mask: false
+masked-citations:
+# If true, adds today's date below author affiliations. If text, can be any value.
+# This is not standard APA format, but it is convenient.
+# Works with docx, html, and typst. 
+draft-date: false
+# Language options. See https://quarto.org/docs/authoring/language.html
+lang: en-US
+language:
+  citation-last-author-separator: "and"
+  citation-masked-author: "Masked Citation"
+  citation-masked-date: "n.d."
+  citation-masked-title: "Masked Title"
+  email: "Email"
+  title-block-author-note: "Author Note"
+  title-block-correspondence-note: "Correspondence concerning this article should be addressed to"
+  title-block-role-introduction: "Author roles were classified using the Contributor Role Taxonomy (CRediT; [credit.niso.org](https://credit.niso.org)) as follows:"
+  title-impact-statement: "Impact Statement"
+  references-meta-analysis: "References marked with an asterisk indicate studies included in the meta-analysis."
+format:
+  apaquarto-html: 
+    toc: true
+    theme: cosmo
+    echo: true
+    css: styles.css
+  apaquarto-typst: 
+    keep-typ: true
+    list-of-figures: false
+    list-of-tables: false
+    toc: true
+    papersize: "us-letter"
+  apaquarto-pdf:
+    # Can be jou (journal), man (manuscript), stu (student), or doc (document)
+    toc: false
+    documentmode: man
+    keep-tex: true
+echo: true
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| 
+if (!require(pacman)) install.packages("pacman")
+pacman::p_load(tidyverse)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| 
+library(tidyverse)
+library(tidyverse)
+library(tibble)
+library(dplyr)
+library(skimr)
+```
+
+Summary statistics are concise numerical measures that capture the essential characteristics of a dataset. They serve as foundational tools in data analysis, providing concise descriptions of large datasets. They help analysts and researchers understand the central tendencies, variability, and overall distribution of data, making complex datasets interpretable and actionable. Without summary statistics, raw data would be overwhelming and difficult to interpret, making it challenging to draw meaningful conclusions or communicate findings effectively.
+
+In R, summary statistics are foundational for data analysis, enabling users to efficiently condense complex data into interpretable values like the mean, median, mode, standard deviation, and quantiles. R offers a rich ecosystem of functions and packages, each with unique features. Base R provides basic summaries, while dplyr allows flexible, tidy group summaries, skimr and summarytools create detailed, readable overviews, often with visual elements. Packages like psych, Hmisc, and pastecs offer more advanced descriptive statistics. For publication-ready tables, gtsummary and table1 are ideal. Additional tools such as janitor, rstatix, and doBy support quick tabulation and custom summaries, giving users a range of options for data analysis.
+
+As the first and often most critical step in any analytical workflow, summary statistics in R empower analysts and researchers to understand, compare, and communicate data-driven insights with clarity and precision.
+
+Summary statistics can be typically divided into:
+
+1.  **Descriptive statistics**: Summarize the main features of a dataset (e.g., mean, median, mode). *This will be our focus here.*
+
+2.  **Inferential statistics**: Make predictions or inferences about a population based on a sample (not the focus here).
+
+I would like to highlight a book, *Making sense of statistics: A conceptual overview*, [@oh2023making] which offers a clear and accessible introduction to key statistical concepts for beginners. The book focuses on building conceptual understanding of both descriptive and inferential statistics, using simple explanations, practical examples, and step-by-step guidance. It is designed to help in applying statistics to research and interpreting data effectively.
+
+For a deeper exploration of R packages used for summarizing data, I encourage you to visit the source by [@medcalf2018favourite]
+
+Additonally, watch this [**tutorial video**](https://www.youtube.com/watch?v=yoPGwvUzjgQ) on descriptive statistics in R to get you started.
+
+<br>
+
+# Key Measures in Summary Statistics
+
+Summary statistics simplify complex datasets into a few key numbers, making it easier to understand and communicate the main characteristics of the data.
+
+The primary measures include central tendency (mean, median, and mode), which describe where most values fall, and measures of dispersion, which capture the spread of the data. Measures of shape and distribution, such as skewness and kurtosis, provide insight into the overall pattern and extremities of the data.
+
+Visualization tools like histograms and boxplots help illustrate these patterns and highlight outliers or skewness. Handling missing data is also important, as different types of missingness (MCAR, MAR, MNAR) can bias results if not addressed through omission or imputation.
+
+Frequency tables and cross-tabulations organize and display how often values or categories occur, making it easier to spot patterns and summarize large datasets. Finally, summarizing entire data frames with these statistics offers a comprehensive overview of each variable, revealing trends and important features within the dataset.
+
+Furthermore, read [Modern Statistics with R](https://modernstatisticswithr.com/index.html) to understand essential tools and techniques in contemporary statistical data analysis, using the R programming language. The book features numerous examples and over 200 exercises with worked solutions. The online version is freely available and regularly updated, with downloadable datasets for hands-on learning
+
+The YouTube videos referenced here may assist in further understanding the code chunks presented above [@walker2023gtsummary] [@dre2024gentle] [@Schork2021]
+
+
+<br>
+
+# Practical Application
+
+Try this exercise to understand how to read data and apply summary statistics functions using the **Star Wars** dataset.
+
+Before we get started, we must install essential packages that might be needed later.
+
+```{r}
+if (!require(pacman)) install.packages("pacman")
+pacman::p_load(tidyverse)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library(conflicted)
+library(tidyverse)
+library(flextable)
+library(ftExtra)
+library(knitr)
+library("htmltools")
+library("ggplot2")
+library(dplyr)
+library(DT)
+library(kableExtra)
+conflicts_prefer(dplyr::filter, .quiet = TRUE)
+conflicts_prefer(flextable::separate_header, .quiet = TRUE)
+
+```
+
+Load the Star Wars dataset available in the dylyr package. Read more on dylyr package here [@dplyr2023]
+
+```{r}
+library(dplyr)
+data(starwars)
+```
+
+To begin our analysis, we will display the first 10 rows of the starwars dataset. This provides a quick overview of the data structure and its key variables before we proceed with summary statistics.
+
+```{r}
+starwars_tbl <- starwars %>%
+  slice_head(n = 10)
+
+kable(starwars_tbl, format = "latex", booktabs = TRUE, caption = "Table 1. Star Wars Data") %>%
+  kable_styling(latex_options = "striped", full_width = FALSE)
+
+
+```
+
+```{r}
+# Mean height
+starwars %>% 
+  summarise(mean_height = mean(height, na.rm = TRUE))
+```
+
+```{r}
+# Median height
+starwars %>% 
+  summarise(median_height = median(height, na.rm = TRUE))
+```
+
+```{r}
+# Mode height
+
+starwars %>%
+  filter(!is.na(height)) %>%
+  count(height, sort = TRUE) %>%
+  slice_max(n = 1, order_by = n) %>%
+  select(mode_height = height)
+
+```
+
+Now, let's apply other summary functions.
+
+```{r}
+# Select relevant variables
+starwars_selected <- starwars %>%
+  select(height, mass, gender, birth_year, species)
+
+# Tidy summary for numeric variables
+starwars_selected %>%
+  summarise(
+    mean_height = mean(height, na.rm = TRUE),
+    sd_height = sd(height, na.rm = TRUE),
+    mean_mass = mean(mass, na.rm = TRUE),
+    sd_mass = sd(mass, na.rm = TRUE)
+  )
+
+# Frequency table for gender (tidyverse style)
+starwars_selected %>%
+  count(gender, name = "frequency")
+
+# Proportion table for gender (tidyverse style)
+starwars_selected %>%
+  count(gender, name = "frequency") %>%
+  mutate(proportion = frequency / sum(frequency))
+
+# Comprehensive tidy summary using skimr
+skim(starwars_selected)
+
+```
+
+<br>
+
+Let's look at a visual pattern of the height of different characters in Star Wars.
+
+```{r}
+starwars %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(binwidth = 8, fill = "navy", color = "blue") +
+  labs(
+    title = "Figure 4. Histogram of Height of Characters in Star Wars",
+    x = "Height (cm)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+Now, we filter the species to get visual pattern of the height of different *human* characters in Star Wars.
+
+```{r}
+starwars %>%
+  filter(species == "Human") %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(binwidth = 8, fill = "navy", color = "blue") +
+  labs(
+    title = "Figure 5. Histogram of Height of Human Characters in Star Wars",
+    x = "Height (cm)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+Furthermore, this YouTube video [Return of the Star Wars dataset](https://www.youtube.com/watch?v=4vSfbz9YMa0) may be an interesting resource to help you better understand the dataset.
+
+<br>
+
+# Limitation
+
+Summary statistics provide a quick and accessible overview of a dataset, but they come with important limitations.
+
+As highlighted in Naked Statistics [@wheelan2013naked], these measures can be misapplied, misinterpreted, or even manipulated, leading to misleading conclusions. Summary statistics only describe what is present in the data—they do not explain underlying causes, cannot be generalized beyond the sample without further analysis, and offer no predictive power. By condensing complex data into single values, they may obscure important patterns or differences within the data. Additionally, summary statistics do not reveal relationships between variables and can mask issues like bias or subgroup variation.
+
+Therefore, while useful for initial exploration, summary statistics should always be complemented by more detailed analyses and visualizations to avoid oversimplification and misinterpretation [@wienclaw2009misuse].
+
+<br>
+
+# Conclusion
+
+Summary statistics are a vital first step in data analysis, offering a fast and accessible way to understand and interpret datasets. In R, calculating measures like the mean, median, and standard deviation is straightforward, whether for an entire dataset or for specific groups, thanks to built-in functions and powerful packages such as dplyr. Automating these summaries in R, as noted by [@lane2013descriptive], streamlines your workflow and helps organize your analysis.
+
+However, it is important to recognize the limitations of summary statistics. While they provide useful snapshots, they do not explain underlying causes, predict future outcomes, or reveal relationships between variables. Summary statistics can also obscure important patterns or differences within subgroups and may mask issues like bias or sampling problems, as highlighted in Naked Statistics [@wheelan2013naked]. Relying solely on these measures can therefore lead to oversimplification or misinterpretation of your data [@wienclaw2009misuse].
+
+For these reasons, summary statistics should be viewed as an essential starting point, but always complemented with more detailed analyses and visualizations to gain a deeper, more accurate understanding of your data. By mastering summary statistics in R—and remaining aware of their limitations—you can uncover valuable insights, make more informed decisions, and communicate your findings clearly in research or business contexts.
+
+\newpage
+
+<br>
+
+# References
+
+<!-- References will auto-populate in the refs div below -->
+
+::: {#refs}
+:::
+
+
+\newpage
+
+<br>
+
+# Affidative
+
+I hereby affirm that this submitted paper was authored unaided and solely by me. Additionally, no other sources than those in the reference list were used. Parts of this paper, including tables and figures, that have been taken either verbatim or analogously from other works have in each case been properly cited with regard to their origin and authorship. This paper either in parts or in its entirety, be it in the same or similar form, has not been submitted to any other examination board and has not been published.
+
+I acknowledge that the university may use plagiarism detection software to check my thesis. I agree to cooperate with any investigation of suspected plagiarism and to provide any additional information or evidence requested by the university.
+
+Checklist:
+
+-   [x] The handout contains 3-5 pages of text.
+-   [x] The submission contains the Quarto file of the handout.
+-   [x] The submission contains the Quarto file of the presentation.
+-   [x] The submission contains the HTML file of the handout.
+-   [x] The submission contains the HTML file of the presentation.
+-   [x] The submission contains the PDF file of the handout.
+-   [x] The submission contains the PDF file of the presentation.
+-   [x] The title page of the presentation and the handout contain personal details (name, email, matriculation number).
+-   [x] The handout contains a abstract.
+-   [x] The presentation and the handout contain a bibliography, created using BibTeX with APA citation style.
+-   [x] Either the handout or the presentation contains R code that proof the expertise in coding.
+-   [x] The handout includes an introduction to guide the reader and a conclusion summarizing the work and discussing potential further investigations and readings, respectively.
+-   [x] All significant resources used in the report and R code development.
+-   [x] The filled out Affidavit.
+-   [x] A concise description of the successful use of Git and GitHub, as detailed here: <https://github.com/hubchev/make_a_pull_request>.
+-   [x] The link to the presentation and the handout published on GitHub.
+
+Jelin George, 2025,May 28, Cologne
