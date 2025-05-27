@@ -324,7 +324,7 @@ For these reasons, summary statistics should be viewed as an essential starting 
 
 \newpage
 
-<br>
+<br><br>
 
 # Affidative
 
